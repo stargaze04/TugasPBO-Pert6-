@@ -14,10 +14,10 @@ public abstract class LayananService implements BisaDites {
     
     public static int totalNotaDibuat = 0;
 
-    public LayananService(String namaPelanggan, String tipeHp, double biayaDasar) {
+    public LayananService(String namaPelanggan, String tipeHp, double biayaDasar) throws IllegalArgumentException {
         this.namaPelanggan = namaPelanggan;
         this.tipeHp = tipeHp;
-        this.biayaDasar = biayaDasar;
+        setBiayaDasar(biayaDasar);
         totalNotaDibuat++;
     }
 
@@ -41,12 +41,11 @@ public abstract class LayananService implements BisaDites {
         return this.biayaDasar;
     }
 
-    public void setBiayaDasar(double biayaDasar) {
-        if (biayaDasar >= 0) {
-            this.biayaDasar = biayaDasar;
-        } else {
-            System.out.println("Biaya dasar tidak valid!");
+    public void setBiayaDasar(double biayaDasar) throws IllegalArgumentException {
+        if (biayaDasar < 0) {
+            throw new IllegalArgumentException("Biaya dasar tidak boleh bernilai negatif!");
         }
+        this.biayaDasar = biayaDasar;
     }
 
     public abstract void cetakNota();
