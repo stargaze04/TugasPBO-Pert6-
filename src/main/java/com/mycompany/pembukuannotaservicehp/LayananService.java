@@ -3,11 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.pembukuannotaservicehp;
+   import java.io.Serializable;
 /**
  *
  * @author Bintang
  */
-public abstract class LayananService implements BisaDites {
+public abstract class LayananService implements BisaDites, Serializable {
+    private static final long serialVersionUID = 1L;
     private String namaPelanggan;
     private String tipeHp;
     private double biayaDasar;

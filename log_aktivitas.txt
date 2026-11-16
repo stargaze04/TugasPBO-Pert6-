@@ -1,0 +1,5 @@
+Tambah Nota: Pelanggan Rah (Asus)
+Tambah Nota: Pelanggan rah (asus)
+Tambah Teknisi: t01 - Suki
+Transaksi Association: Teknisi Suki menangani rah
+Serialization: Menyimpan data objek ke data_konter.dat

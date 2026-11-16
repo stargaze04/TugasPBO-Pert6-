@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.pembukuannotaservicehp;
-
+import java.io.Serializable;
 /**
  *
  * @author Bintang
  */
-public class Teknisi {
+public class Teknisi implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String idTeknisi;
     private String namaTeknisi;
     private String spesialisasi;

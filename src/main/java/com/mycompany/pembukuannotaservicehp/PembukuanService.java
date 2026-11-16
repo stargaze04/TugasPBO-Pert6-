@@ -14,20 +14,23 @@ public class PembukuanService {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        KonterService konter = new KonterService("Konter Service HP GnB", "POS-04", "v10.0");
+        KonterService konter = new KonterService("Konter Service HP GnB", "POS-04", "v11.0");
         TransaksiService transaksi = new TransaksiService("TRX-2026");
 
         boolean isRunning = true;
 
         while (isRunning) {
-            konter.infoBengkel();
+            konter.infoKonter();
             System.out.println("Menu Utama:");
             System.out.println("1. Tambah Catatan Service Baru");
             System.out.println("2. Tambah Data Teknisi Baru");
             System.out.println("3. Tampilkan Seluruh Nota & Teknisi");
             System.out.println("4. Proses Penugasan Teknisi ke Nota");
-            System.out.println("5. Keluar");
-            System.out.print("Pilih Menu (1-5): ");
+            System.out.println("5. Simpan Data Objek ke File");
+            System.out.println("6. Muat Data Objek dari File");
+            System.out.println("7. Tampilkan Riwayat Log Aktivitas");
+            System.out.println("8. Keluar");
+            System.out.print("Pilih Menu (1-8): ");
 
             int pilihan = 0;
             try {
@@ -80,7 +83,7 @@ public class PembukuanService {
                         }
 
                         konter.tambahNota(notaBaru);
-                        System.out.println("Sukses! Nota berhasil ditambahkan ke KonterService.");
+                        System.out.println("Sukses! Nota berhasil ditambahkan dan dicatat ke log.");
 
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error Validasi: " + e.getMessage());
@@ -92,7 +95,7 @@ public class PembukuanService {
                     }
                 }
                 case 2 -> {
-                    System.out.println("\n-- Tambah Teknisi --");
+                    System.out.println("\n-- Tambah Teknisi Mandiri --");
                     System.out.print("Masukkan ID Teknisi: ");
                     String id = scanner.nextLine();
                     System.out.print("Masukkan Nama Teknisi: ");
@@ -102,14 +105,14 @@ public class PembukuanService {
 
                     Teknisi teknisiBaru = new Teknisi(id, namaTek, spesialis);
                     konter.tambahTeknisi(teknisiBaru);
-                    System.out.println("Sukses! Teknisi baru ditambahkan ke sistem.");
+                    System.out.println("Sukses! Teknisi baru ditambahkan dan dicatat ke log.");
                 }
                 case 3 -> {
                     konter.tampilkanSemuaNota();
                     konter.tampilkanSemuaTeknisi();
                 }
                 case 4 -> {
-                    System.out.println("\n-- Simulasi Interaksi --");
+                    System.out.println("\n-- Simulasi Interaksi Association --");
                     System.out.print("Masukkan ID Teknisi yang bertugas: ");
                     String idTek = scanner.nextLine();
                     System.out.print("Masukkan Nama Pelanggan pada Nota: ");
@@ -120,11 +123,15 @@ public class PembukuanService {
 
                     if (tekDitemukan != null && notaDitemukan != null) {
                         transaksi.prosesPenugasan(tekDitemukan, notaDitemukan);
+                        konter.catatLog("Transaksi Association: Teknisi " + tekDitemukan.getNamaTeknisi() + " menangani " + notaDitemukan.getNamaPelanggan());
                     } else {
                         System.out.println("Gagal: ID Teknisi atau Nama Pelanggan tidak ditemukan!");
                     }
                 }
-                case 5 -> {
+                case 5 -> konter.simpanDataObjek();
+                case 6 -> konter.muatDataObjek();
+                case 7 -> konter.bacaLog();
+                case 8 -> {
                     System.out.println("Terima kasih telah menggunakan sistem Pembukuan Service HP!");
                     isRunning = false;
                 }
