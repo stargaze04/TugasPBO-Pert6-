@@ -48,14 +48,14 @@ public class PembukuanNotaServiceHP{
         boolean isRunning = true;
 
         System.out.println("=================================================");
-        System.out.println("  SISTEM PEMBUKUAN SERVICE HP - TUGAS 7 (ABSTRACT)");
+        System.out.println("            SISTEM PEMBUKUAN SERVICE HP          ");
         System.out.println("=================================================");
 
         while (isRunning) {
             System.out.println("\nMenu Utama:");
             System.out.println("1. Tambah Catatan Service Baru");
             System.out.println("2. Tampilkan Seluruh Nota & Simulasi Diagnostik");
-            System.out.println("3. Cari Nota (Fitur Overloading)");
+            System.out.println("3. Cari Nota");
             System.out.println("4. Keluar");
             System.out.print("Pilih Menu (1-4): ");
             
@@ -66,9 +66,9 @@ public class PembukuanNotaServiceHP{
                 case 1 -> {
                     if (jumlahNota < daftarNota.length) {
                         System.out.println("\n-- Pilih Jenis Perbaikan --");
-                        System.out.println("1. Hardware (Ganti Sparepart)");
+                        System.out.println("1. Hardware (Sparepart)");
                         System.out.println("2. Software (Flashing/Bypass)");
-                        System.out.println("3. Pembersihan (Debu/Mesin)");
+                        System.out.println("3. Pembersihan (Luar/Dalam)");
                         System.out.print("Pilihan (1/2/3): ");
                         int jenis = scanner.nextInt();
                         scanner.nextLine();
@@ -89,11 +89,11 @@ public class PembukuanNotaServiceHP{
                             scanner.nextLine();
                             daftarNota[jumlahNota] = new ServiceHardware(nama, tipe, biayaJasa, sparepart, biayaSparepart);
                         } else if (jenis == 2) {
-                            System.out.print("Jenis Tindakan (misal: Flashing ROM): ");
+                            System.out.print("Jenis Tindakan: ");
                             String tindakan = scanner.nextLine();
                             daftarNota[jumlahNota] = new ServiceSoftware(nama, tipe, biayaJasa, tindakan);
                         } else if (jenis == 3) {
-                            System.out.print("Area yang dibersihkan (misal: Speaker/Mesin): ");
+                            System.out.print("Area yang dibersihkan: ");
                             String area = scanner.nextLine();
                             daftarNota[jumlahNota] = new ServicePembersihan(nama, tipe, biayaJasa, area);
                         }
